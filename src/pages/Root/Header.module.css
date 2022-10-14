@@ -1,0 +1,22 @@
+.header {
+  background-color: #212226;
+}
+
+.navs {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.links {
+  display: flex;
+  flex: 1;
+  gap: 2em;
+  list-style: none;
+}
+
+.link,
+.link:visited {
+  text-decoration: none;
+  color: #fff
+}
