@@ -7,8 +7,9 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 // Pages
 import Root from './pages/Root';
 import Post from './pages/Post';
-import Posts from './pages/Posts';
-
+import Posts, {
+  loader as postsLoader
+} from './pages/Posts';
 
 const router = createBrowserRouter([
   {
@@ -17,7 +18,8 @@ const router = createBrowserRouter([
     children: [
       {
         path: 'posts',
-        element: <Posts />
+        element: <Posts />,
+        loader: postsLoader
       },
       {
         path: 'posts/:postId',
