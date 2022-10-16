@@ -6,7 +6,11 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 // Pages
 import Root from './pages/Root';
-import Post from './pages/Post';
+
+import PostWithComments, {
+  loader as postLoader
+} from './pages/PostWithComments';
+
 import Posts, {
   loader as postsLoader
 } from './pages/Posts';
@@ -23,7 +27,8 @@ const router = createBrowserRouter([
       },
       {
         path: 'posts/:postId',
-        element: <Post />
+        element: <PostWithComments />,
+        loader: postLoader
       }
     ]
   }

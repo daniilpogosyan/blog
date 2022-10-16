@@ -1,0 +1,7 @@
+.comment-list {
+  list-style: none;
+}
+
+.comment-list > li {
+  margin-bottom: 20px;
+}

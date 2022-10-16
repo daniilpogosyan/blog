@@ -1,0 +1,19 @@
+.card {
+  max-width: 600px;
+  padding: 0.5em 1em;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px #0003;
+}
+
+.body {
+  padding-left: 1em;
+}
+
+.author {
+  font-style: italic;
+}
+
+.date {
+  color: #555;
+  text-align: right;
+}
