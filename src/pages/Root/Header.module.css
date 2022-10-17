@@ -1,11 +1,15 @@
 .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
   background-color: #212226;
+  color: #fff;
 }
 
 .navs {
   display: flex;
   align-items: center;
-  padding: 10px 20px;
 }
 
 .links {
@@ -18,5 +22,5 @@
 .link,
 .link:visited {
   text-decoration: none;
-  color: #fff
+  color: inherit;
 }

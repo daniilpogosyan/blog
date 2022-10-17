@@ -1,8 +1,14 @@
+import { useContext } from 'react';
+
 import { Link } from 'react-router-dom';
+
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 import style from './Header.module.css';
 
 export default function Header() {
+  const [currentUser, setCurrentUser] = useContext(CurrentUserContext);
+
   return (
     <header className={style.header}>
       <nav className={style.navs}>
@@ -19,6 +25,13 @@ export default function Header() {
           </li>
         </ul>
       </nav>
+      <div>
+        {
+          currentUser
+          ? currentUser.username
+          : 'Not logged in'
+        }
+      </div>
     </header>
   )
 }

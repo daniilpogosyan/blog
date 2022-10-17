@@ -5,7 +5,9 @@ import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 // Pages
-import Root from './pages/Root';
+import Root, {
+  loader as rootLoader
+} from './pages/Root';
 
 import PostWithComments, {
   loader as postLoader
@@ -19,6 +21,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
+    loader: rootLoader,
     children: [
       {
         path: 'posts',
