@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Outlet, useLoaderData } from "react-router-dom";
 
 import CurrentUserContext from '../../contexts/CurrentUserContext.js';
+import { getJWT } from  '../../storage/jwt';
 
 // Components 
 import Header from './Header';
@@ -19,10 +20,19 @@ export default function Root() {
   )
 }
 
-
+// Get data about currentUser
 export async function loader() {
-  // hardcoded mock user since authentication is not implemented yet
-  return {
-    username: 'HARDCODED USERNAME'
+  const token = getJWT();
+  if (!token) {
+    return null;
   }
+
+  const user = await fetch('http://localhost:8000/account/', {
+    method: 'get',
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+
+  return user;
 }
