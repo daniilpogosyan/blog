@@ -9,6 +9,10 @@ import Root, {
   loader as rootLoader
 } from './pages/Root';
 
+import {
+  action as loginAction
+} from './pages/Login';
+
 import PostWithComments, {
   loader as postLoader
 } from './pages/PostWithComments';
@@ -23,6 +27,10 @@ const router = createBrowserRouter([
     element: <Root />,
     loader: rootLoader,
     children: [
+      {
+        path: 'login',
+        action: loginAction
+      },
       {
         path: 'posts',
         element: <Posts />,
