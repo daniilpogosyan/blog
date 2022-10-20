@@ -4,6 +4,8 @@ import { useFetcher } from 'react-router-dom';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import { getJWT } from '../../storage/jwt';
 
+import LogoutButton from './LogoutButton';
+
 export default function UserBar() {
   const [currentUser, setCurrentUser] = useContext(CurrentUserContext);
   const fetcher = useFetcher();
@@ -34,6 +36,7 @@ export default function UserBar() {
     return (
       <div>
         <p>{currentUser.username}</p>
+        <LogoutButton />
       </div>
     )
   }
