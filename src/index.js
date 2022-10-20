@@ -13,6 +13,10 @@ import {
   action as loginAction
 } from './pages/Login';
 
+import SignUp, {
+  action as signupAction
+} from './pages/SignUp';
+
 import PostWithComments, {
   loader as postLoader
 } from './pages/PostWithComments';
@@ -30,6 +34,11 @@ const router = createBrowserRouter([
       {
         path: 'login',
         action: loginAction
+      },
+      {
+        path: 'signup',
+        element: <SignUp />,
+        action: signupAction
       },
       {
         path: 'posts',
