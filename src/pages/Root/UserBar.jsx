@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react';
-import { useFetcher } from 'react-router-dom';
+import { useFetcher, Link  } from 'react-router-dom';
 
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import { getJWT } from '../../storage/jwt';
@@ -42,22 +42,25 @@ export default function UserBar() {
   }
 
   return (
-    <fetcher.Form action="/login" method="post">
-      <label htmlFor="login-email">Email:</label>
-      <input
-        id="login-email"
-        type="email"
-        placeholder="youremail@somemail.com"
-        name="email"
-      />
-      <label htmlFor="login-password">Password:</label>
-      <input
-        id="login-password"
-        type="password"
-        placeholder="Password"
-        name="password"
-      />
-      <button>Log in</button>
-    </fetcher.Form>
+    <div>
+      <fetcher.Form action="/login" method="post">
+        <label htmlFor="login-email">Email:</label>
+        <input
+          id="login-email"
+          type="email"
+          placeholder="youremail@somemail.com"
+          name="email"
+        />
+        <label htmlFor="login-password">Password:</label>
+        <input
+          id="login-password"
+          type="password"
+          placeholder="Password"
+          name="password"
+        />
+        <button>Log in</button>
+      </fetcher.Form>
+      <Link to='/signup'>Sign up</Link>
+    </div>
   );
 }
