@@ -22,7 +22,8 @@ import NewPost, {
 } from './pages/NewPost';
 
 import PostWithComments, {
-  loader as postLoader
+  loader as postLoader,
+  action as postAction
 } from './pages/PostWithComments';
 
 import Posts, {
@@ -52,7 +53,8 @@ const router = createBrowserRouter([
       {
         path: 'posts/:postId',
         element: <PostWithComments />,
-        loader: postLoader
+        loader: postLoader,
+        action: postAction
       },
       {
         path: 'newpost',

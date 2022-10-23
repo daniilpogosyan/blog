@@ -1,14 +1,23 @@
+import { useContext } from 'react';
 import { useLoaderData } from 'react-router-dom';
 
 import Post from './Post';
 import Comments from './Comments';
+import CommentForm from './CommentForm';
+
+import CurrentUserContext from '../../contexts/CurrentUserContext';
+
+import { getJWT } from '../../storage/jwt';
 
 export default function PostWithComments() {
+  const [currentUser] = useContext(CurrentUserContext);
   const { post, comments } = useLoaderData();
+
   return (
     <div>
       <Post {...post} />
       <Comments comments={comments} />
+      {currentUser && <CommentForm />}
     </div>
   )
 }
@@ -29,4 +38,25 @@ export async function loader({params}) {
     fetchAndGetBody(`http://localhost:8000/posts/${params.postId}/comments`)
   ]);
   return { post, comments };
+}
+
+export async function action({params, request}) {
+  const token = getJWT();
+  if (!token) {
+    return null
+  }
+
+  const formData = await request.formData();
+  const comment = {
+    body: formData.get('body')
+  };
+
+ await fetch(`http://localhost:8000/posts/${params.postId}/comments`, {
+    method: 'post',
+    body: JSON.stringify(comment),
+    headers: {
+      'Content-type': 'application/json',
+      Authorization: 'Bearer ' + token
+    }
+  });
 }
