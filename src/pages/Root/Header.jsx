@@ -1,10 +1,15 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 import UserBar from './UserBar';
 
 import style from './Header.module.css';
 
 export default function Header() {
+  const [currentUser] = useContext(CurrentUserContext);
+
   return (
     <header className={style.header}>
       <nav className={style.navs}>
@@ -19,6 +24,13 @@ export default function Header() {
               Posts
             </Link>
           </li>
+          {currentUser?.permissions.includes('write-post') && (
+            <li>
+              <Link to="/newpost" className={style.link}>
+                New post
+              </Link>
+            </li>
+          )}
         </ul>
       </nav>
       <div>

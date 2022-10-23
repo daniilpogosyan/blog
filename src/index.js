@@ -17,6 +17,10 @@ import SignUp, {
   action as signupAction
 } from './pages/SignUp';
 
+import NewPost, {
+  action as newPostAction
+} from './pages/NewPost';
+
 import PostWithComments, {
   loader as postLoader
 } from './pages/PostWithComments';
@@ -49,6 +53,11 @@ const router = createBrowserRouter([
         path: 'posts/:postId',
         element: <PostWithComments />,
         loader: postLoader
+      },
+      {
+        path: 'newpost',
+        element: <NewPost />,
+        action: newPostAction,
       }
     ]
   }
