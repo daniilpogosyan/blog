@@ -1,15 +1,22 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useFetcher, Link  } from 'react-router-dom';
 
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import { getJWT } from '../../storage/jwt';
 
+import LoginForm from './LoginForm';
 import LogoutButton from './LogoutButton';
+import style from './UserBar.module.css';
 
 export default function UserBar() {
   const [currentUser, setCurrentUser] = useContext(CurrentUserContext);
+  const [isToggled, setIsToggled] = useState(false);
+
   const fetcher = useFetcher();
   
+  function toggleDropdown() {
+    setIsToggled(isToggled ? false : true);
+  }
 
   useEffect(() => {
     // fetcher.state is 'loading' when fetcher action is done
@@ -32,35 +39,53 @@ export default function UserBar() {
     // eslint-disable-next-line
   }, [fetcher]);
 
-  if (currentUser) {
-    return (
-      <div>
-        <p>{currentUser.username}</p>
-        <LogoutButton />
-      </div>
-    )
-  }
-
   return (
     <div>
-      <fetcher.Form action="/login" method="post">
-        <label htmlFor="login-email">Email:</label>
-        <input
-          id="login-email"
-          type="email"
-          placeholder="youremail@somemail.com"
-          name="email"
-        />
-        <label htmlFor="login-password">Password:</label>
-        <input
-          id="login-password"
-          type="password"
-          placeholder="Password"
-          name="password"
-        />
-        <button>Log in</button>
-      </fetcher.Form>
-      <Link to='/signup'>Sign up</Link>
+      {currentUser
+      ? (
+        <button
+          onClick={toggleDropdown}
+          className={style.link}
+        >
+          {currentUser.username}
+        </button>
+      ) : (
+        <>
+          <button
+            onClick={toggleDropdown}
+            className={style.link}
+          >
+            Log in
+          </button>
+          <Link
+            className={style.link}
+            to='/signup'
+          >
+            Sign up
+          </Link>
+        </>
+      )}
+      
+      <div className={style["dropdown-container"]}>
+        <div className={`${style.dropdown} ${isToggled ? style.toggled: ''}`}>
+          {currentUser
+          ? (
+            <>
+              {currentUser.permissions.includes('write-post') &&
+                <Link to='/newpost' className={style['dropdown-option']}>New post</Link>
+              }
+              <LogoutButton />
+            </>
+          ) : (
+            <>
+              <LoginForm />
+              <p className={style.subtext}>
+                Don't have an account? <Link to='/signup'>Create one now.</Link>
+              </p>
+            </>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
