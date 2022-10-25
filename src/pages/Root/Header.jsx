@@ -24,7 +24,7 @@ export default function Header() {
               Posts
             </Link>
           </li>
-          {currentUser?.permissions.includes('write-post') && (
+          {currentUser?.permissions?.includes('write-post') && (
             <li>
               <Link to="/newpost" className={style.link}>
                 New post

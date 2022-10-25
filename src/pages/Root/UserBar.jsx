@@ -71,7 +71,7 @@ export default function UserBar() {
           {currentUser
           ? (
             <>
-              {currentUser.permissions.includes('write-post') &&
+              {currentUser?.permissions?.includes('write-post') &&
                 <Link to='/newpost' className={style['dropdown-option']}>New post</Link>
               }
               <LogoutButton />

@@ -23,7 +23,10 @@ export default function LoginForm() {
         method: 'get',
         headers: { Authorization: `Bearer ${token}`}
       })
-      .then((response) => response.json())
+      .then((response) => {
+        const user = response.status < 400 ? response.json() : null;
+        return user;        
+      })
       .then((user) => setCurrentUser(user))
       .catch((err) => console.error(err));
     }

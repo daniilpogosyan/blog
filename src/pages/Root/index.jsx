@@ -27,12 +27,13 @@ export async function loader() {
     return null;
   }
 
-  const user = await fetch('http://localhost:8000/account/', {
+  const response = await fetch('http://localhost:8000/account/', {
     method: 'get',
     headers: {
       Authorization: `Bearer ${token}`
     }
   });
 
+  const user = response.status < 400 ? await response.json() : null
   return user;
 }
