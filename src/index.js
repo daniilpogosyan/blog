@@ -21,6 +21,11 @@ import NewPost, {
   action as newPostAction
 } from './pages/NewPost';
 
+import EditPost, {
+  action as editPostAction,
+  loader as editPostLoader
+} from './pages/EditPost';
+
 import PostWithComments, {
   loader as postLoader,
   action as postAction
@@ -55,6 +60,12 @@ const router = createBrowserRouter([
         element: <PostWithComments />,
         loader: postLoader,
         action: postAction
+      },
+      {
+        path: 'posts/:postId/edit',
+        element: <EditPost />,
+        loader: editPostLoader,
+        action: editPostAction
       },
       {
         path: 'newpost',

@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, Link } from 'react-router-dom';
 
 import Post from './Post';
 import Comments from './Comments';
@@ -15,6 +15,7 @@ export default function PostWithComments() {
 
   return (
     <div>
+      <Link to='edit'>Edit</Link>
       <Post {...post} />
       <Comments comments={comments} />
       {currentUser && <CommentForm />}
