@@ -26,6 +26,10 @@ import EditPost, {
   loader as editPostLoader
 } from './pages/EditPost';
 
+import {
+  action as deletePostAction
+} from './pages/DeletePost';
+
 import PostWithComments, {
   loader as postLoader,
   action as postAction
@@ -66,6 +70,10 @@ const router = createBrowserRouter([
         element: <EditPost />,
         loader: editPostLoader,
         action: editPostAction
+      },
+      {
+        path: 'posts/:postId/delete',
+        action: deletePostAction
       },
       {
         path: 'newpost',
