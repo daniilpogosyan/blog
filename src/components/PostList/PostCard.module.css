@@ -44,3 +44,28 @@ li > .card {
   right: 0;
   content: "";
 }
+
+/* Status tag */
+.status-tag {
+  top: 0;
+  right: 0;
+  padding: 0.25em 1em;
+  position: absolute;
+  background-color: #fff;
+  text-transform: capitalize;
+}
+
+.status-tag.unpublished {
+  background-color: #f80;
+  color: #fff;
+}
+
+.status-tag.published {
+  background-color: #0d47a1;
+  color: #fff;
+}
+
+.status-tag.archived {
+  background-color: #b00;
+  color: #fff;
+}
