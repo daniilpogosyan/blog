@@ -1,21 +1,11 @@
 import { useLoaderData } from "react-router-dom";
 
-import PostCard from "./PostCard";
-
-import style from "./Posts.module.css";
+import PostList from '../components/PostList';
 
 export default function Posts() {
   const posts = useLoaderData();
   return (
-    <ul className={style['post-list']}>
-      {
-        posts.map((post) => (
-          <li key={post.id}>
-            <PostCard {...post} />
-          </li>
-        ))
-      }
-    </ul>
+    <PostList posts={posts} />
   )
 }
 

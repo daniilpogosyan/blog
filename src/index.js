@@ -39,6 +39,10 @@ import Posts, {
   loader as postsLoader
 } from './pages/Posts';
 
+import MyPosts, {
+  loader as myPostsLoader
+} from './pages/MyPosts';
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -58,6 +62,11 @@ const router = createBrowserRouter([
         path: 'posts',
         element: <Posts />,
         loader: postsLoader
+      },
+      {
+        path: 'myposts',
+        element: <MyPosts />,
+        loader: myPostsLoader
       },
       {
         path: 'posts/:postId',
