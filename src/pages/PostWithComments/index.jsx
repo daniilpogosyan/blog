@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { useLoaderData, Link } from 'react-router-dom';
+import { useLoaderData, useSearchParams, Link } from 'react-router-dom';
 
 import Post from './Post';
 import DeletePostForm from './DeletePostForm';
@@ -33,17 +33,37 @@ export default function PostWithComments() {
 
 // Generic function for getting json data from response
 // It's required to request post and comments in parallel
-async function fetchAndGetBody(resource) {
- const response = await fetch(resource);
- const data = await response.json();
- return data;
+async function fetchAndGetBody(resource, authRequired = false) {
+  const fetchObj = {
+    headers: {},
+  }
+
+  if (authRequired) {
+    const token = getJWT();
+    if (token === null) {
+      return null
+    }
+    fetchObj.headers["Authorization"] = 'Bearer ' + token
+  }
+
+  const response = await fetch(resource, fetchObj);
+  const data = await response.json();
+  return data;
 }
 
-export async function loader({params}) {
+export async function loader({params, request}) {
+  // parse query param to authorize
+  const url = new URL(request.url);
+  const authRequired = url.searchParams.get('authorize') === 'true';
+
+  const postBaseUrl = `${process.env.REACT_APP_BLOG_API_BASEURL}/posts/${params.postId}`;
+  const postUrl = postBaseUrl + (authRequired ? '?author=me' : '');
+  const commentsUrl = `${process.env.REACT_APP_BLOG_API_BASEURL}/posts/${params.postId}/comments`;
+  
   // get post and comments in parallel
   const [post, comments] = await Promise.all([
-    fetchAndGetBody(`${process.env.REACT_APP_BLOG_API_BASEURL}/posts/${params.postId}`),
-    fetchAndGetBody(`${process.env.REACT_APP_BLOG_API_BASEURL}/posts/${params.postId}/comments`)
+    fetchAndGetBody(postUrl, true),
+    fetchAndGetBody(commentsUrl)
   ]);
   return { post, comments };
 }
