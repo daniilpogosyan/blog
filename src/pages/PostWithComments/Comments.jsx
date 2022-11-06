@@ -9,7 +9,7 @@ export default function Comments({ comments }) {
       <ul className={style['comment-list']}>
         {
           Array.isArray(comments) && comments.map(comment => (
-            <li key={comment.id}>
+            <li key={comment._id}>
               <CommentCard {...comment} />
             </li>
           ))
