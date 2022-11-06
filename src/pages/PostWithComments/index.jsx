@@ -42,8 +42,8 @@ async function fetchAndGetBody(resource) {
 export async function loader({params}) {
   // get post and comments in parallel
   const [post, comments] = await Promise.all([
-    fetchAndGetBody(`http://localhost:8000/posts/${params.postId}`),
-    fetchAndGetBody(`http://localhost:8000/posts/${params.postId}/comments`)
+    fetchAndGetBody(`${process.env.REACT_APP_BLOG_API_BASEURL}/posts/${params.postId}`),
+    fetchAndGetBody(`${process.env.REACT_APP_BLOG_API_BASEURL}/posts/${params.postId}/comments`)
   ]);
   return { post, comments };
 }
@@ -59,7 +59,7 @@ export async function action({params, request}) {
     body: formData.get('body')
   };
 
- await fetch(`http://localhost:8000/posts/${params.postId}/comments`, {
+ await fetch(`${process.env.REACT_APP_BLOG_API_BASEURL}/posts/${params.postId}/comments`, {
     method: 'post',
     body: JSON.stringify(comment),
     headers: {

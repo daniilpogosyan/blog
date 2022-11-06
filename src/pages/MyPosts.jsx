@@ -17,7 +17,7 @@ export async function loader() {
     return []
   }
 
-  const response = await fetch('http://localhost:8000/posts/?author=me', {
+  const response = await fetch(`${process.env.REACT_APP_BLOG_API_BASEURL}/posts/?author=me`, {
     headers: {
       Authorization: 'Bearer ' + token
     }

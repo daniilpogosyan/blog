@@ -32,7 +32,7 @@ export async function action({request}) {
 
   const newPost = Object.fromEntries(await request.formData());
 
-  const response = await fetch('http://localhost:8000/posts', {
+  const response = await fetch(`${process.env.REACT_APP_BLOG_API_BASEURL}/posts`, {
     method: 'post',
     headers: {
       'Content-type': 'application/json',

@@ -8,7 +8,7 @@ export async function action({params}) {
     return null;
   }
 
-  await fetch(`http://localhost:8000/posts/${params.postId}`, {
+  await fetch(`${process.env.REACT_APP_BLOG_API_BASEURL}/posts/${params.postId}`, {
     method: 'delete',
     headers: {
       Authorization: 'Bearer ' + token,

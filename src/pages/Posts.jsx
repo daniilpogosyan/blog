@@ -10,7 +10,7 @@ export default function Posts() {
 }
 
 export async function loader() {
-  const response = await fetch('http://localhost:8000/posts/');
+  const response = await fetch(`${process.env.REACT_APP_BLOG_API_BASEURL}/posts/`);
   const posts = await response.json();
   return posts;
 }

@@ -43,7 +43,7 @@ export default function SignUp() {
 
 export async function action({request}) {
   const userData = Object.fromEntries(await request.formData());
-  const response = await fetch('http://localhost:8000/account/signup', {
+  const response = await fetch(`${process.env.REACT_APP_BLOG_API_BASEURL}/account/signup`, {
     method: 'post',
     headers: {
       'Content-type': 'application/json'

@@ -7,7 +7,7 @@ export async function action({request}) {
     password: formData.get('password')
   };
 
-  const response = await fetch('http://localhost:8000/account/login', {
+  const response = await fetch(`${process.env.REACT_APP_BLOG_API_BASEURL}/account/login`, {
     method: 'post',
     body: JSON.stringify(credentials),
     headers: {

@@ -60,7 +60,7 @@ export async function loader({params}) {
     return redirect('/');
   }
 
-  const response = await fetch(`http://localhost:8000/posts/${params.postId}`);
+  const response = await fetch(`${process.env.REACT_APP_BLOG_API_BASEURL}/posts/${params.postId}`);
   const postData = await response.json();
   return postData;
 }
@@ -74,7 +74,7 @@ export async function action({request, params}) {
 
   const editedPost = Object.fromEntries(await request.formData());
 
-  const response = await fetch(`http://localhost:8000/posts/${params.postId}`, {
+  const response = await fetch(`${process.env.REACT_APP_BLOG_API_BASEURL}/posts/${params.postId}`, {
     method: 'put',
     headers: {
       'Content-type': 'application/json',

@@ -19,7 +19,7 @@ export default function LoginForm() {
         return null;
       }
 
-      fetch('http://localhost:8000/account/', {
+      fetch(`${process.env.REACT_APP_BLOG_API_BASEURL}/account/`, {
         method: 'get',
         headers: { Authorization: `Bearer ${token}`}
       })
