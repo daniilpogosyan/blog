@@ -60,7 +60,17 @@ export async function loader({params}) {
     return redirect('/');
   }
 
-  const response = await fetch(`${process.env.REACT_APP_BLOG_API_BASEURL}/posts/${params.postId}`);
+  const token = getJWT();
+  if (!token) {
+    return null
+  }
+
+  const response = await fetch(`${process.env.REACT_APP_BLOG_API_BASEURL}/posts/${params.postId}/?author=me`, {
+    headers: {
+      'Content-type': 'application/json',
+      Authorization: 'Bearer ' + token
+    }
+  });
   const postData = await response.json();
   return postData;
 }
