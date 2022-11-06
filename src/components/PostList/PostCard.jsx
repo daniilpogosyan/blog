@@ -8,11 +8,15 @@ export default function PostCard({ title, author, id, status }) {
   return (
     <div className={style.card}>
       <h2 className={style.heading}>{title}</h2>
-      <p className={style.author}>by {author.username}</p>
+      {author && (
+        <p className={style.author}>by {author.username}</p>
+      )}
       <Link to={linkUrl} className={style.link}>Read post</Link>
-      <div className={statusTagClassName}>
-        {status}
-      </div>
+      {status && (
+        <div className={statusTagClassName}>
+          {status}
+        </div>
+      )}
     </div>
   )
 }

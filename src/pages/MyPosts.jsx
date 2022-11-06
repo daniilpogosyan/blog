@@ -7,7 +7,7 @@ import PostList from '../components/PostList';
 export default function Posts() {
   const myPosts = useLoaderData();
   return (
-    <PostList posts={myPosts} />
+    <PostList posts={myPosts} excludedProps={['author']} />
   )
 }
 
