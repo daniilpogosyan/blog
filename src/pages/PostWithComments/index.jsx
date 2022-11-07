@@ -62,7 +62,7 @@ export async function loader({params, request}) {
   
   // get post and comments in parallel
   const [post, comments] = await Promise.all([
-    fetchAndGetBody(postUrl, true),
+    fetchAndGetBody(postUrl, authRequired),
     fetchAndGetBody(commentsUrl)
   ]);
   return { post, comments };
