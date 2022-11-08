@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, useRef } from 'react';
 import { useFetcher, Link  } from 'react-router-dom';
 
 import CurrentUserContext from '../../contexts/CurrentUserContext';
@@ -10,6 +10,9 @@ import style from './UserBar.module.css';
 
 export default function UserBar() {
   const [currentUser, setCurrentUser] = useContext(CurrentUserContext);
+  const dropdownRef = useRef(null);
+  const dropdownTogglerRef = useRef(null);
+
   const [isToggled, setIsToggled] = useState(false);
 
   const fetcher = useFetcher();
@@ -39,8 +42,25 @@ export default function UserBar() {
     // eslint-disable-next-line
   }, [fetcher]);
 
+  // Collapse the dropdown if a user clicked outside the dropdown block
+  useEffect(() => {
+    function collapseDropdown(e) {
+      const clickOnToggler = dropdownTogglerRef.current.contains(e.target);
+      const clickOnDropdown = dropdownTogglerRef.current.contains(e.target);
+
+      if (!clickOnDropdown && !clickOnToggler) {
+        setIsToggled(false);
+      }
+    }
+
+    window.addEventListener('click', collapseDropdown);
+    return () => {
+      window.removeEventListener('click', collapseDropdown);
+    }
+  }, [dropdownRef]);
+
   return (
-    <div>
+    <div ref={dropdownTogglerRef}>
       {currentUser
       ? (
         <button
@@ -67,7 +87,7 @@ export default function UserBar() {
       )}
       
       <div className={style["dropdown-container"]}>
-        <div className={`${style.dropdown} ${isToggled ? style.toggled: ''}`}>
+        <div ref={dropdownRef} className={`${style.dropdown} ${isToggled ? style.toggled: ''}`}>
           {currentUser
           ? (
             <>
