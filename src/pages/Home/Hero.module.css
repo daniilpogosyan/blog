@@ -25,7 +25,8 @@
 /* `filter: drop-shadow()` is used instead of `box-shadow`,
   since `box-shadow` does not work when userd `clip-path` */
 .drop-shadow-right {
-  filter: drop-shadow(12px 8px 8px #0008)
+  filter: drop-shadow(12px 8px 8px #0008);
+  z-index: 1;
 }
 
 .left, .right {
@@ -38,6 +39,10 @@
 }
 .right {
   clip-path: var(--right-side);
+  background-image: url('./hero.svg');
+  background-position: right;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 /* `float` & `shape-outside` are used to wrap content on clipped path */
