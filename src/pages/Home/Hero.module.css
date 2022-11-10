@@ -1,0 +1,60 @@
+.container {
+  margin: auto;
+  position: relative;
+  font-size: 48px;
+  font-family: 'serif';
+  font-weight: 600;
+  height: 400px;
+  --left-side: polygon(0 0, calc(100% / 3) 0, calc(100% * 2 / 3) 100%, 0 100%);
+  --right-side: polygon(calc(100% / 3) 0, 100% 0, 100% 100%, calc(100% / 3 * 2) 100%);
+}
+
+.light {
+  background-color: #f0f0f0;
+  color: #000
+}
+
+.side {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* `filter: drop-shadow()` is used instead of `box-shadow`,
+  since `box-shadow` does not work when userd `clip-path` */
+.drop-shadow-right {
+  filter: drop-shadow(12px 8px 8px #0008)
+}
+
+.left, .right {
+  box-sizing: border-box;
+  padding: 1em;
+  height: 100%;
+}
+.left {
+  clip-path: var(--left-side);
+}
+.right {
+  clip-path: var(--right-side);
+}
+
+/* `float` & `shape-outside` are used to wrap content on clipped path */
+.blank {
+  height: 100%;
+  width: 100%;
+  shape-margin: 0.5em;
+}
+
+.blank-right {
+  float: right;
+  clip-path: var(--right-side);
+  shape-outside: var(--right-side);
+}
+
+.blank-left {
+  float: left;
+  clip-path: var(--left-side);
+  shape-outside: var(--left-side);
+}

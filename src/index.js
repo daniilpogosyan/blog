@@ -9,6 +9,7 @@ import Root, {
   loader as rootLoader
 } from './pages/Root';
 
+import Home from './pages/Home';
 import {
   action as loginAction
 } from './pages/Login';
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
     element: <Root />,
     loader: rootLoader,
     children: [
+      {
+        index: true,
+        element: <Home />
+      },
       {
         path: 'login',
         action: loginAction
