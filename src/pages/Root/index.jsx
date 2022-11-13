@@ -15,7 +15,9 @@ export default function Root() {
     // update the current user (i.e. log-in form)
     <CurrentUserContext.Provider value={[currentUser, setCurrentUser]}>
       <Header />
-      <Outlet />
+      <main className='page-content'>
+        <Outlet />
+      </main>
     </CurrentUserContext.Provider>
   )
 }

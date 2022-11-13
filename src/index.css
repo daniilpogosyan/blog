@@ -11,3 +11,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Limit content width so that it won't spread to the screen edges */
+.page-content {
+  max-width: 80rem;
+  margin: auto;
+}
