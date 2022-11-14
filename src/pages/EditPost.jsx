@@ -1,4 +1,5 @@
 import { Form, redirect, useActionData, useLoaderData } from 'react-router-dom';
+import { Editor } from '@tinymce/tinymce-react';
 import { getJWT } from '../storage/jwt';
 
 export default function NewPost() {
@@ -19,15 +20,24 @@ export default function NewPost() {
           <p>{errors?.title?.message}</p>
         </div>
         <div>
-          <label htmlFor="post-body">Body:</label>
-          <textarea
-            name="body"
-            id="post-body"
-            cols="30"
-            rows="10"
-            defaultValue={postData.body}
-          >
-          </textarea>
+          <Editor
+              textareaName='body'
+              apiKey='gy3e8g7jg729arbox9mtac6bd3zi1quvxdartjwolvpmednb'
+              initialValue={postData.body}
+              init={{
+                height: 500,
+                plugins: [
+                  'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+                  'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+                  'insertdatetime', 'media', 'table', 'code',  'wordcount'
+                ],
+                toolbar: 'undo redo | blocks | ' +
+                  'bold italic forecolor | alignleft aligncenter ' +
+                  'alignright alignjustify | bullist numlist outdent indent | ' +
+                  'removeformat | help',
+                content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+              }}
+            />
           <p>{errors?.body?.message}</p>
         </div>
         <fieldset>
