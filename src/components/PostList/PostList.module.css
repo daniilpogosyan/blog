@@ -7,3 +7,18 @@
   padding: 0;
   list-style: none;
 }
+
+.item {
+  animation: float-in 1.5s forwards;
+}
+
+@keyframes float-in {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

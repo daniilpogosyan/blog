@@ -17,7 +17,7 @@ export default function PostList({posts, excludedProps}) {
     <ul className={style['post-list']}>
       {
         posts.map((post) => (
-          <li key={post.id}>
+          <li key={post.id} className={style['item']}>
             <PostCard {...excludeProps(post, excludedProps)} />
           </li>
         ))
