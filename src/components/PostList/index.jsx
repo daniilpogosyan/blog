@@ -1,5 +1,5 @@
 import PostCard from "./PostCard";
-import style from './PostList.module.css';
+import style from './PostList.module.scss';
 
 function excludeProps(obj, exclude) {
   if (!Array.isArray(exclude)) return obj

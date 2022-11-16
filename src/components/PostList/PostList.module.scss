@@ -9,7 +9,17 @@
 }
 
 .item {
-  animation: float-in 1.5s forwards;
+  animation: float-in 1s forwards;
+  opacity: 0;
+}
+
+//delay after each card floating-in, in seconds
+$delay-step: 0.1;
+$list-size: 20;
+@for $card-index from 1 to $list-size {
+  .item:nth-child(#{$card-index}) {
+    animation-delay: #{$card-index * $delay-step}s;
+  }
 }
 
 @keyframes float-in {
