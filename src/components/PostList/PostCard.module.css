@@ -1,4 +1,11 @@
 .card {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: 
+    "title title title title"  
+    "author author author author"
+    "link link date date";
   position: relative;
   box-sizing: border-box;
   padding: 20px 20px;
@@ -9,8 +16,14 @@
   transition: transform 0.4s;
 }
 
-.card:hover {
+.card:hover,
+.card:focus-within {
   transform: scale(1.1);
+}
+
+.card:focus-within {
+  outline: solid 4px #4678ed;
+  outline-offset: 4px;
 }
 
 /* Stretch card if it is placed inside a <li> since
@@ -22,17 +35,38 @@ li > .card {
 }
 
 .heading {
+  grid-area: title;
+  align-self: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
   text-align: center;
+  margin: 0;
 }
 
 .author {
+  align-self: flex-end;
+  grid-area: author;
   color: #464646;
   text-align: center;
 }
 
 
 .link {
+  grid-area: link;
+  align-self: flex-end;
+  opacity: 0;
+  outline: none;
+}
+
+.card:hover .link,
+.card:focus-within .link {
+  opacity: 1;   
+}
+
+.date {
+  grid-area: date;
   text-align: right;
+  align-self: flex-end;
 }
 
 /* Stretch link all over the card */

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import style from './PostCard.module.css';
 
-export default function PostCard({ title, author, id, status }) {
+export default function PostCard({ title, author, id, status, createdAt }) {
   const statusTagClassName = `${style['status-tag']} ${style[status]}`;
   // If the post is published, then authorization is not required.
   // If the post status is undefined, then the post is assumed to be published.
@@ -20,6 +20,7 @@ export default function PostCard({ title, author, id, status }) {
           {status}
         </div>
       )}
+      <span className={style['date']}>{(new Date(createdAt)).toDateString()}</span>
     </div>
   )
 }
