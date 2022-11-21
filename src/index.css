@@ -17,3 +17,8 @@ code {
   max-width: 80rem;
   margin: auto;
 }
+
+main {
+  padding: 40px;
+  overflow: hidden;
+}
