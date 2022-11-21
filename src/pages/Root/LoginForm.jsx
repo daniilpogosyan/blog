@@ -37,21 +37,25 @@ export default function LoginForm() {
   
   return (
     <fetcher.Form action="/login" method="post" className={style.form}>
-      <label htmlFor="login-email">Email:</label>
-      <input
-        id="login-email"
-        type="email"
-        placeholder="youremail@somemail.com"
-        name="email"
-      />
-      <label htmlFor="login-password">Password:</label>
-      <input
-        id="login-password"
-        type="password"
-        placeholder="Password"
-        name="password"
-      />
-      <button className='button primary outline'>Log in</button>
+      <div className="form-field">
+        <label htmlFor="login-email">Email:</label>
+        <input
+          id="login-email"
+          type="email"
+          placeholder="youremail@somemail.com"
+          name="email"
+        />
+      </div>
+      <div className="form-field">
+        <label htmlFor="login-password">Password:</label>
+        <input
+          id="login-password"
+          type="password"
+          placeholder="Password"
+          name="password"
+        />
+      </div>
+      <button className='button'>Log in</button>
     </fetcher.Form>
   )
 }

@@ -69,3 +69,21 @@ main {
   color: var(--text-color);
 }
 
+
+.form-field {
+  margin-bottom: 1em;
+}
+
+.form-field > input {
+  font: inherit;
+  font-size: inherit;
+  padding: 0.25em 0.5em;
+  border-radius: 0.8em;
+  border: 1px solid #aaa;
+}
+
+.form-field > label {
+  font: inherit;
+  display: block;
+  margin-bottom: 0.5em;
+}

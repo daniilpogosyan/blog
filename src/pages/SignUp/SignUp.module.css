@@ -11,21 +11,6 @@
   box-shadow: 0 20px 20px #0008;
 }
 
-.input-block {
-  margin-bottom: 2em;
-}
-
-.input-block > input {
-  font-size: inherit;
-  padding: 0.25em 0.5em;
-  border-radius: 0.8em;
-}
-
-.input-block > label {
-  display: block;
-  margin-bottom: 0.5em;
-}
-
 .submit-button {
   font-size: 120%;
   padding: 0.5em;

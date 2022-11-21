@@ -9,7 +9,7 @@ export default function SignUp() {
       <div className={style['form']}>
         <h1>Sign up</h1>
         <Form method="post" >
-          <div className={style['input-block']}>
+          <div className="form-field">
             <label htmlFor="login-username">Username:</label>
             <input
               id="login-username"
@@ -18,7 +18,7 @@ export default function SignUp() {
               name="username"
             />
           </div>
-          <div className={style['input-block']}>
+          <div className="form-field">
             <label htmlFor="login-email">Email:</label>
             <input
               id="login-email"
@@ -27,7 +27,7 @@ export default function SignUp() {
               name="email"
             />
           </div>
-          <div className={style['input-block']}>
+          <div className="form-field">
             <label htmlFor="login-password">Password:</label>
             <input
               id="login-password"

@@ -8,7 +8,7 @@ export default function NewPost() {
   return (
     <div>
       <Form method="post">
-        <div>
+        <div className="form-field">
           <label htmlFor="new-post-title">Title:</label>
           <input id="new-post-title" type="text" name="title"/>
           <p>{errors?.title?.message}</p>

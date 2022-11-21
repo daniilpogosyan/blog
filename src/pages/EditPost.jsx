@@ -9,7 +9,7 @@ export default function NewPost() {
   return (
     <div>
       <Form method="put">
-        <div>
+        <div className="form-field">
           <label htmlFor="post-title">Title:</label>
           <input
             id="post-title"
