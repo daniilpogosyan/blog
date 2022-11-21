@@ -25,7 +25,7 @@ export default function PostWithComments() {
       )}
       <Post {...post} />
       <Comments comments={comments} />
-      {currentUser && <CommentForm />}
+      {currentUser?.permissions.includes('write-comment') && <CommentForm />}
     </div>
   )
 }
