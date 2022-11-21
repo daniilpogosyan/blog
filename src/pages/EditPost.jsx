@@ -2,13 +2,15 @@ import { Form, redirect, useActionData, useLoaderData } from 'react-router-dom';
 import { Editor } from '@tinymce/tinymce-react';
 import { getJWT } from '../storage/jwt';
 
+import style from './EditPost.module.css';
+
 export default function NewPost() {
   const errors = useActionData();
   const postData = useLoaderData();
 
   return (
     <div>
-      <Form method="put">
+      <Form method="put" className={style['form']}>
         <div className="form-field">
           <label htmlFor="post-title">Title:</label>
           <input
@@ -43,7 +45,7 @@ export default function NewPost() {
         <fieldset>
           {
             ['unpublished', 'published', 'archived'].map((status) => (
-              <div>
+              <div key={status}>
                 <label htmlFor={`post-status-${status}`}>{status}</label>
                 <input
                   id={`post-status-${status}`}

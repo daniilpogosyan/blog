@@ -1,0 +1,7 @@
+.form fieldset {
+  border: none;
+}
+.form fieldset input[type='radio'] {
+  float: left;
+  margin-right: 0.5em;
+}
