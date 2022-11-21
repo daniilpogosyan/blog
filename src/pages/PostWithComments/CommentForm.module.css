@@ -1,0 +1,20 @@
+.form label {
+  font-style: italic;
+  font-size: 150%;  
+}
+
+.form button {
+  margin-top: 2em;
+  font: inherit;
+  padding: 0.5em 2em;
+  border-radius: 0.5em;
+
+  cursor: pointer;
+  border: none;
+  background-color: #0f82e7;
+  color: #fff;
+}
+
+.form button:hover {
+  background-color: #0f67b3;
+}

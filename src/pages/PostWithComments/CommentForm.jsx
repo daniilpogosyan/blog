@@ -1,5 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { useFetcher } from 'react-router-dom';
+import { Editor } from '@tinymce/tinymce-react';
+
+import style from './CommentForm.module.css';
 
 export default function CommentForm({ comments }) {
   const fetcher = useFetcher();
@@ -14,9 +17,21 @@ export default function CommentForm({ comments }) {
   }, [fetcher])
 
   return (
-    <fetcher.Form ref={formRef} method="post">
+    <fetcher.Form ref={formRef} method="post" className={style['form']}>
       <label htmlFor="new-comment-input">Your comment:</label>
-      <textarea name="body" id="new-comment-input" cols="30" rows="10"></textarea>
+      <Editor
+        textareaName='body'
+        apiKey='gy3e8g7jg729arbox9mtac6bd3zi1quvxdartjwolvpmednb'
+        init={{
+          menubar: false,
+          plugins: [
+            'advlist', 'autolink', 'lists', 'link',
+            'table', 'code', 'wordcount'
+          ],
+          toolbar: 'bold italic | bullist numlist outdent indent',
+          content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+        }}
+      />
       <button>{fetcher.state === 'idle' ? 'Submit' : 'Submitting...'}</button>
     </fetcher.Form>
   )
