@@ -109,6 +109,9 @@ export async function action({request, params}) {
   if (response.status >= 400) {
     return (await response.json()).errors;
   }
-  
-  return redirect('/');
+  const postFromResponse = await response.json();
+
+  // After editing post can change status to a private one (unpublished, archived)
+  // In this case authorization is required
+  return redirect(`/posts/${postFromResponse._id}?authorize=true`);
 }

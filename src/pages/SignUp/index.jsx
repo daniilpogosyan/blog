@@ -1,4 +1,4 @@
-import { Form } from 'react-router-dom';
+import { Form, redirect } from 'react-router-dom';
 
 import style from './SignUp.module.css';
 
@@ -52,4 +52,7 @@ export async function action({request}) {
     },
     body: JSON.stringify(userData)
   });
+
+  if (response.status < 400)
+    return redirect('/');
 }

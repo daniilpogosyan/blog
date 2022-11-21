@@ -61,5 +61,9 @@ export async function action({request}) {
     return (await response.json()).errors;
   }
   
-  return redirect('/');
+  
+  const postFromResponse = await response.json();
+  // New posts are created with status 'unpublished'
+  // In this case authorization is required 
+  return redirect(`/posts/${postFromResponse._id}?authorize=true`);
 }
