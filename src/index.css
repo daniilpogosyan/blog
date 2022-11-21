@@ -22,3 +22,50 @@ main {
   padding: 40px;
   overflow: hidden;
 }
+
+
+/* buttons */
+.button {
+  white-space: nowrap;
+  display: inline-block;
+  padding: 0.3em 0.6em;
+  background-color: var(--color);
+  border: none;
+  border-radius: 0.5em;
+  color: var(--text-color);
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.1s ease
+}
+
+.primary {
+  --color: #0f82e7;
+  --color-dark: #0f67b3;
+  --text-color: #fff;
+}
+
+.danger {
+  --color: #c72911;
+  --color-dark: #9a210e;
+  --text-color: #fff;
+}
+
+.button:hover,
+.button:focus-visible {
+  color: var(--text-color);
+  background-color: var(--color-dark);
+}
+
+.button.outline {
+  background-color: #fff;
+  color: var(--color);;
+  border: 1px solid var(--color-dark);
+}
+
+.button.outline:hover,
+.button.outline:focus-visible {
+  background-color: var(--color);
+  color: var(--text-color);
+}
+

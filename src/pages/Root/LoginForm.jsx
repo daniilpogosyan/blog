@@ -51,7 +51,7 @@ export default function LoginForm() {
         placeholder="Password"
         name="password"
       />
-      <button>Log in</button>
+      <button className='button primary outline'>Log in</button>
     </fetcher.Form>
   )
 }

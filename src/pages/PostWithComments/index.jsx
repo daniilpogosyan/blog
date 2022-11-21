@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import { useLoaderData, useSearchParams, Link } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 
 import Post from './Post';
-import DeletePostForm from './DeletePostForm';
+import ActionPanel from './ActionPanel';
 import Comments from './Comments';
 import CommentForm from './CommentForm';
 
@@ -16,14 +16,9 @@ export default function PostWithComments() {
 
   return (
     <div>
-      {/* Suggest to edit or delete post only to its author */}
-      {post.author._id === currentUser?._id && (
-        <>
-          <Link to='edit'>Edit</Link>
-          <DeletePostForm />
-        </>
-      )}
       <Post {...post} />
+      {/* Suggest to edit or delete post only to its author */}
+      {post.author._id === currentUser?._id && <ActionPanel />}
       <Comments comments={comments} />
       {currentUser?.permissions.includes('write-comment') && <CommentForm />}
     </div>

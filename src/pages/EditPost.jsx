@@ -57,7 +57,7 @@ export default function NewPost() {
           }
         </fieldset>
         
-        <button>Save</button>
+        <button className="button primary">Save</button>
       </Form>
     </div>
   )

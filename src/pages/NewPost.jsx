@@ -33,7 +33,7 @@ export default function NewPost() {
           />
           <p>{errors?.body?.message}</p>
         </div>
-        <button>Create</button>
+        <button className="button primary">Create</button>
       </Form>
     </div>
   )

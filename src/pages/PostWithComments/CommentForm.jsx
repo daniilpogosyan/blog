@@ -40,7 +40,9 @@ export default function CommentForm({ comments }) {
           }}
         />
       </CommentCard>
-      <button>{fetcher.state === 'idle' ? 'Submit' : 'Submitting...'}</button>
+      <button className="button primary">
+        {fetcher.state === 'idle' ? 'Submit' : 'Submitting...'}
+      </button>
     </fetcher.Form>
   )
 }

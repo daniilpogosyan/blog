@@ -14,6 +14,7 @@ export default function LogoutButton() {
   return (
     <button
       onClick={logout}
+      className="button danger outline"
     >
       Log out
     </button>

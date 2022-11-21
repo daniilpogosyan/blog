@@ -1,0 +1,9 @@
+.action-panel {
+  --border-side: 1px solid #aaa;
+  padding: 1em 2em;
+  margin-top: 50px;
+  border-top: var(--border-side);
+  border-bottom: var(--border-side);
+  display: flex;
+  gap: 40px;
+}
