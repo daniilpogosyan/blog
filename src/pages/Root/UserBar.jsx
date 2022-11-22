@@ -44,28 +44,29 @@ export default function UserBar() {
 
   // Collapse the dropdown if a user clicked outside the dropdown block
   useEffect(() => {
-    function collapseDropdown(e) {
+    function collapseOnClickOutside(e) {
       const clickOnToggler = dropdownTogglerRef.current.contains(e.target);
-      const clickOnDropdown = dropdownTogglerRef.current.contains(e.target);
+      const clickOnDropdown = dropdownRef.current.contains(e.target);
 
       if (!clickOnDropdown && !clickOnToggler) {
         setIsToggled(false);
       }
     }
 
-    window.addEventListener('click', collapseDropdown);
+    window.addEventListener('click', collapseOnClickOutside);
     return () => {
-      window.removeEventListener('click', collapseDropdown);
+      window.removeEventListener('click', collapseOnClickOutside);
     }
-  }, [dropdownRef]);
+  }, []);
 
   return (
-    <div ref={dropdownTogglerRef}>
+    <div>
       {currentUser
       ? (
         <button
           onClick={toggleDropdown}
           className={style.link}
+          ref={dropdownTogglerRef}
         >
           {currentUser.username}
         </button>
@@ -74,12 +75,14 @@ export default function UserBar() {
           <button
             onClick={toggleDropdown}
             className={style.link}
+            ref={dropdownTogglerRef}
           >
             Log in
           </button>
           <Link
             className={style.link}
             to='/signup'
+            onClick={()=>setIsToggled(false)}
           >
             Sign up
           </Link>
@@ -101,7 +104,7 @@ export default function UserBar() {
             <>
               <LoginForm />
               <p className={style.subtext}>
-                Don't have an account? <Link to='/signup'>Create one now.</Link>
+                Don't have an account? <Link to='/signup' onClick={()=>setIsToggled(false)}>Create one now.</Link>
               </p>
             </>
           )}
