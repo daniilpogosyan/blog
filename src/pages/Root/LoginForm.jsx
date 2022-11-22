@@ -55,7 +55,7 @@ export default function LoginForm() {
           name="password"
         />
       </div>
-      <button className='button'>Log in</button>
+      <button className='button primary outline'>Log in</button>
     </fetcher.Form>
   )
 }

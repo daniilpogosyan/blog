@@ -36,7 +36,7 @@ export default function SignUp() {
               name="password"
             />
           </div>
-          <button className={style['submit-button']}>Sign up</button>
+          <button className={`${style['submit-button']} button primary`}>Sign up</button>
         </Form>
       </div>
     </div>
