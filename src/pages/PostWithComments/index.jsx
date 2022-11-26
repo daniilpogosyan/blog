@@ -10,6 +10,8 @@ import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 import { getJWT } from '../../storage/jwt';
 
+import style from './PostWithComments.module.css';
+
 export default function PostWithComments() {
   const [currentUser] = useContext(CurrentUserContext);
   const { post, comments } = useLoaderData();
@@ -19,8 +21,15 @@ export default function PostWithComments() {
       <Post {...post} />
       {/* Suggest to edit or delete post only to its author */}
       {post.author._id === currentUser?._id && <ActionPanel />}
+      <h2>Comments: </h2>
+      {!currentUser ? (
+        <p className={style["no-form-message"]}>You must be logged in to post a comment.</p>
+      ) : !currentUser.permissions.includes('write-post') ? (
+        <p className={style["no-form-message"]}>You are not allowed to write posts</p>
+      ) : (
+        <CommentForm />
+      )}
       <Comments comments={comments} />
-      {currentUser?.permissions.includes('write-comment') && <CommentForm />}
     </div>
   )
 }

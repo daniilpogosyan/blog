@@ -21,7 +21,6 @@ export default function CommentForm({ comments }) {
 
   return (
     <fetcher.Form ref={formRef} method="post" className={style['form']}>
-      <label htmlFor="new-comment-input">Your comment:</label>
       <CommentCard author={currentUser} createdAt={new Date()}>
         <Editor
           textareaName='body'
@@ -39,10 +38,10 @@ export default function CommentForm({ comments }) {
             content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
           }}
         />
-      </CommentCard>
       <button className="button primary">
         {fetcher.state === 'idle' ? 'Submit' : 'Submitting...'}
       </button>
+      </CommentCard>
     </fetcher.Form>
   )
 }
