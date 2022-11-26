@@ -62,7 +62,7 @@ export async function loader({params, request}) {
 
   const postBaseUrl = `${process.env.REACT_APP_BLOG_API_BASEURL}/posts/${params.postId}`;
   const postUrl = postBaseUrl + (authRequired ? '?author=me' : '');
-  const commentsUrl = `${process.env.REACT_APP_BLOG_API_BASEURL}/posts/${params.postId}/comments`;
+  const commentsUrl = `${process.env.REACT_APP_BLOG_API_BASEURL}/posts/${params.postId}/comments/?sort=-createdAt`;
   
   // get post and comments in parallel
   const [post, comments] = await Promise.all([
