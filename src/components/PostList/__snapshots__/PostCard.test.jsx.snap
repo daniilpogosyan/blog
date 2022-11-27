@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PostCard structure 1`] = `
+<div>
+  <div
+    class="card"
+  >
+    <h2
+      class="heading"
+    >
+      Post for test
+    </h2>
+    <p
+      class="author"
+    >
+      by 
+      John Doe
+    </p>
+    <a
+      class="link"
+      href="/posts/mockId12345"
+    >
+      Read post
+    </a>
+    <div
+      class="status-tag published"
+    >
+      published
+    </div>
+    <span
+      class="date"
+    >
+      Fri Jul 14 2017
+    </span>
+  </div>
+</div>
+`;
