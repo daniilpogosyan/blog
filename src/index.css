@@ -19,10 +19,21 @@ code {
 }
 
 main {
-  padding: 40px;
+  padding: 12px;
   overflow: hidden;
 }
 
+@media (min-width: 600px) {
+  main {
+    padding: 24px;
+  }
+}
+
+@media (min-width: 1200px) {
+  main {
+    padding: 40px;
+  }
+}
 
 /* buttons */
 .button {
