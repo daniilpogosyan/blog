@@ -1,9 +1,6 @@
 .container {
   margin: auto;
   position: relative;
-  font-size: 48px;
-  font-family: 'serif';
-  font-weight: 600;
   height: 400px;
   --left-side: polygon(0 0, calc(100% / 3) 0, calc(100% * 2 / 3) 100%, 0 100%);
   --right-side: polygon(calc(100% / 3) 0, 100% 0, 100% 100%, calc(100% / 3 * 2) 100%);
@@ -29,37 +26,51 @@
   z-index: 1;
 }
 
-.left, .right {
-  box-sizing: border-box;
-  padding: 1em;
+.clipper {
   height: 100%;
 }
-.left {
+
+.left > .clipper {
   clip-path: var(--left-side);
 }
-.right {
+.right > .clipper {
   clip-path: var(--right-side);
-  background-image: url('./hero.svg');
-  background-position: right;
-  background-size: contain;
-  background-repeat: no-repeat;
 }
 
 /* `float` & `shape-outside` are used to wrap content on clipped path */
-.blank {
+.left::before, .right::before {
+  content: '';
   height: 100%;
   width: 100%;
   shape-margin: 0.5em;
 }
-
-.blank-right {
+.left::before {
   float: right;
   clip-path: var(--right-side);
   shape-outside: var(--right-side);
 }
-
-.blank-left {
+.right::before {
   float: left;
   clip-path: var(--left-side);
   shape-outside: var(--left-side);
+}
+
+
+.content {
+  height: 100%;
+}
+
+.left .content {
+  font-size: 48px;
+  font-family: 'serif';
+  font-weight: 600;
+  box-sizing: border-box;
+  padding: 1em;
+}
+
+.right .content {
+  background-image: url('./hero.svg');
+  background-position: right;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
