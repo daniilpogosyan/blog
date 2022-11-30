@@ -2,6 +2,13 @@
   list-style: none;
 }
 
+@media (max-width: 600px) {
+  .comment-list {
+    padding: 0;
+  }
+  
+}
+
 .comment-list > li {
   margin-bottom: 20px;
 }
