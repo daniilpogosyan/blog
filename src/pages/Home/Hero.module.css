@@ -1,63 +1,60 @@
-.container {
-  margin: auto;
-  position: relative;
-  height: 400px;
-  --left-side: polygon(0 0, calc(100% / 3) 0, calc(100% * 2 / 3) 100%, 0 100%);
-  --right-side: polygon(calc(100% / 3) 0, 100% 0, 100% 100%, calc(100% / 3 * 2) 100%);
-}
+/* With cut-off */
+@media (min-width: 800px) {
+  .container {
+    margin: auto;
+    position: relative;
+    height: 400px;
+    --left-side: polygon(0 0, calc(100% / 3) 0, calc(100% * 2 / 3) 100%, 0 100%);
+    --right-side: polygon(calc(100% / 3) 0, 100% 0, 100% 100%, calc(100% / 3 * 2) 100%);
+  }
 
-.light {
-  background-color: #f0f0f0;
-  color: #000
-}
+  .side {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
 
-.side {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
+  /* `filter: drop-shadow()` is used instead of `box-shadow`,
+    since `box-shadow` does not work when userd `clip-path` */
+  .drop-shadow-right {
+    filter: drop-shadow(12px 8px 8px #0008);
+    z-index: 1;
+  }
 
-/* `filter: drop-shadow()` is used instead of `box-shadow`,
-  since `box-shadow` does not work when userd `clip-path` */
-.drop-shadow-right {
-  filter: drop-shadow(12px 8px 8px #0008);
-  z-index: 1;
-}
+  .clipper {
+    height: 100%;
+  }
 
-.clipper {
-  height: 100%;
-}
+  .left > .clipper {
+    clip-path: var(--left-side);
+  }
+  .right > .clipper {
+    clip-path: var(--right-side);
+  }
 
-.left > .clipper {
-  clip-path: var(--left-side);
-}
-.right > .clipper {
-  clip-path: var(--right-side);
-}
+  /* `float` & `shape-outside` are used to wrap content on clipped path */
+  .left::before, .right::before {
+    content: '';
+    height: 100%;
+    width: 100%;
+    shape-margin: 0.5em;
+  }
+  .left::before {
+    float: right;
+    clip-path: var(--right-side);
+    shape-outside: var(--right-side);
+  }
+  .right::before {
+    float: left;
+    clip-path: var(--left-side);
+    shape-outside: var(--left-side);
+  }
 
-/* `float` & `shape-outside` are used to wrap content on clipped path */
-.left::before, .right::before {
-  content: '';
-  height: 100%;
-  width: 100%;
-  shape-margin: 0.5em;
-}
-.left::before {
-  float: right;
-  clip-path: var(--right-side);
-  shape-outside: var(--right-side);
-}
-.right::before {
-  float: left;
-  clip-path: var(--left-side);
-  shape-outside: var(--left-side);
-}
-
-
-.content {
-  height: 100%;
+  .content {
+    height: 100%;
+  }
 }
 
 .left .content {
@@ -66,6 +63,13 @@
   font-weight: 600;
   box-sizing: border-box;
   padding: 1em;
+  border-radius: 20px;
+  background-color: #D9EBFF;
+  color: #4D76B8;
+  background-image: url('./man-sitting.svg');
+  background-position: calc(50% - 150px) 100%;
+  background-size: auto 70%;
+  background-repeat: no-repeat;
 }
 
 .right .content {
@@ -73,4 +77,26 @@
   background-position: right;
   background-size: contain;
   background-repeat: no-repeat;
+}
+
+
+@media (max-width: 799px) {
+  .container {
+    padding: 12px;
+    background-color: #D9EBFF;
+    border-radius: 8px;
+    box-shadow: 0 8px 12px #0008;
+  }
+
+  .left .content {
+    background: none;
+    font-size: 36px;
+    padding: 0;
+    text-align: center;
+  }
+
+  .right .content {
+    height: 200px;
+    background-position: top;
+  }
 }

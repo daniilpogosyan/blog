@@ -4,7 +4,7 @@ export default function Hero() {
   return (
     <div className={style['container']}>
       <div className={`${style['side']} ${style['left']} ${style['drop-shadow-right']}`}>
-        <div className={`${style['clipper']} ${style['light']}`}>
+        <div className={style['clipper']}>
           <div className={style['content']}>
             Share your thoughts with the world!
           </div>
