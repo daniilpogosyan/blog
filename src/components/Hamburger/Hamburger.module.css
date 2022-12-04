@@ -1,0 +1,26 @@
+.hamburger {
+  grid-area: hamburger;
+  font-size: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 1em;
+  width: 1em;
+  background: transparent;
+  border: none;
+  color: inherit;
+  padding: 0;
+
+  transition: transform 0.4s ;
+}
+
+.open {
+  transform: rotate(90deg);
+}
+
+.bar {
+  width: 1em;
+  height: 0.2em;
+  border-radius: 2px;
+  background-color: currentColor;
+}
