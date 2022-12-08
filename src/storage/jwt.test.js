@@ -1,4 +1,4 @@
-import { getJWT, setJWT, removeJWT } from './jwt';
+import { getJWT, setJWT, removeJWT, getBearerToken } from './jwt';
 import { getStorage } from './utils.js';
 
 describe('manage jwt', () => {
@@ -56,5 +56,16 @@ describe('manage jwt', () => {
     setJWT('secondjwt');
     removeJWT();
     expect(getJWT()).toBe(null);
+  });
+  
+  describe('getBearerToken()', () => {
+    test('set, getBearerToken', () => {
+      setJWT('fakejwt');
+      expect(getBearerToken()).toBe('Bearer fakejwt');
+    })
+  
+    test('no jwt exists, throw error', () => {
+      expect(() => getBearerToken()).toThrow('JWT not found');
+    })
   });
 });

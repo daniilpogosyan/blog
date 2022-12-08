@@ -30,3 +30,11 @@ export function removeJWT() {
   return true;
 }
 
+export function getBearerToken() {
+  const token = getJWT();
+  if (token) {
+    return `Bearer ${token}`;
+  } 
+
+  throw new Error('JWT not found');
+}
