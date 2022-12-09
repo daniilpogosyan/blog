@@ -3,7 +3,7 @@ import { BASEURL } from '../utils';
 import httpClient from '../../../http-client';
 
 
-describe('getComments()', () => {
+describe('getComments() returns comments data', () => {
   beforeEach(() => {
     jest.spyOn(httpClient, 'get')
       .mockResolvedValue({json: () => Promise.resolve('mock-data')});
@@ -17,10 +17,6 @@ describe('getComments()', () => {
     expect(actualURL).toEqual(expect.objectContaining(urlForRequest));
   });
 
-  test('throws when postId is not specified', async () => {
-    await expect(getComments()).rejects.toThrow('`postId` must be a non-empty string`');
-  });
-
   test('is called with multiple query params', async () => {
     const postId = 'postid0987';
     const comments = await getComments(postId, {
@@ -32,4 +28,14 @@ describe('getComments()', () => {
     expect(actualUrlSearchParams.get('limit')).toBe('15');
     expect(actualUrlSearchParams.get('sort')).toBe('-createdAt');
   });
+});
+
+describe('getComments() throws error', () => {
+  test('when postId is not specified', async () => {
+    await expect(getComments()).rejects.toThrow('`postId` must be a non-empty string`');
+  });
+  
+  test.todo('when error on network occured');
+
+  test.todo('when post not found');
 });
