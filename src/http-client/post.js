@@ -3,7 +3,7 @@ export default async function postRequest(url, options = {}) {
     ...options,
     method: 'post',
     headers: {
-      ...(options.headers && headers),
+      ...options.headers,
       'Content-type': 'application/json'
     }
   });

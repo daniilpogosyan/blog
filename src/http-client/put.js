@@ -3,7 +3,7 @@ export default async function putRequest(url, options = {}) {
     ...options,
     method: 'put',
     headers: {
-      ...(options.headers && headers),
+      ...options.headers,
       'Content-type': 'application/json'
     }
   });
