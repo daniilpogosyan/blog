@@ -1,11 +1,10 @@
 import { useContext, useEffect } from 'react';
 import { useFetcher } from 'react-router-dom';
 
-import { getJWT } from '../../storage/jwt';
-
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 import style from './LoginForm.module.css';
+import { getMe } from '../../apis/blog';
 
 export default function LoginForm() {
   const [, setCurrentUser] = useContext(CurrentUserContext);
@@ -14,19 +13,7 @@ export default function LoginForm() {
   useEffect(() => {
     // fetcher.state is 'loading' when fetcher action is done
     if (fetcher.state === 'loading') {
-      const token = getJWT();
-      if (!token) {
-        return null;
-      }
-
-      fetch(`${process.env.REACT_APP_BLOG_API_BASEURL}/account/`, {
-        method: 'get',
-        headers: { Authorization: `Bearer ${token}`}
-      })
-      .then((response) => {
-        const user = response.status < 400 ? response.json() : null;
-        return user;        
-      })
+      getMe()
       .then((user) => setCurrentUser(user))
       .catch((err) => console.error(err));
     }

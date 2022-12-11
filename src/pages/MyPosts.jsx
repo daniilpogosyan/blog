@@ -1,5 +1,4 @@
-import { getJWT } from '../storage/jwt';
-
+import { getPosts } from '../apis/blog';
 import { useLoaderData } from "react-router-dom";
 
 import PostList from '../components/PostList';
@@ -12,16 +11,6 @@ export default function Posts() {
 }
 
 export async function loader() {
-  const token = getJWT();
-  if (!token) {
-    return []
-  }
-
-  const response = await fetch(`${process.env.REACT_APP_BLOG_API_BASEURL}/posts/?author=me`, {
-    headers: {
-      Authorization: 'Bearer ' + token
-    }
-  });
-  const posts = await response.json();
+  const posts = await getPosts({author: 'me'});
   return posts;
 }

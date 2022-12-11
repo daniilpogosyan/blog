@@ -2,6 +2,7 @@ import { useLoaderData } from 'react-router';
 
 import Hero from "./Hero";
 import PostList from '../../components/PostList';
+import { getPosts } from '../../apis/blog';
 
 
 export default function Home() {
@@ -19,7 +20,9 @@ export default function Home() {
 }
 
 export async function loader() {
-  const response = await fetch(`${process.env.REACT_APP_BLOG_API_BASEURL}/posts/?sort=-createdAt&limit=6`);
-  const posts = await response.json();
+  const posts = await getPosts({
+    sort: '-createdAt',
+    limit: '6'
+  });
   return posts;
 }

@@ -1,6 +1,6 @@
 import { Form, redirect, useActionData } from 'react-router-dom';
 import { Editor } from '@tinymce/tinymce-react';
-import { getJWT } from '../storage/jwt';
+import { savePost } from '../apis/blog';
 
 export default function NewPost() {
   const errors = useActionData();
@@ -41,28 +41,17 @@ export default function NewPost() {
 
 
 export async function action({request}) {
-  const token = getJWT();
-  if (!token) {
-    return null;
-  }
-
   const newPost = Object.fromEntries(await request.formData());
 
-  const response = await fetch(`${process.env.REACT_APP_BLOG_API_BASEURL}/posts`, {
-    method: 'post',
-    headers: {
-      'Content-type': 'application/json',
-      Authorization: `Bearer ${token}`
-    },
-    body: JSON.stringify(newPost)
-  });
-
-  if (response.status >= 400) {
-    return (await response.json()).errors;
+  let postFromResponse;
+  try {
+    postFromResponse = await savePost(newPost);
+  } catch(err) {
+    // TODO: handle error properly
+    console.error(err);
+    return;
   }
-  
-  
-  const postFromResponse = await response.json();
+
   // New posts are created with status 'unpublished'
   // In this case authorization is required 
   return redirect(`/posts/${postFromResponse._id}?authorize=true`);

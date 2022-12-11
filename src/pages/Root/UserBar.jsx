@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState, useRef } from 'react';
 import { useFetcher, Link  } from 'react-router-dom';
+import { getMe } from '../../apis/blog';
 
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import { getJWT } from '../../storage/jwt';
@@ -29,13 +30,12 @@ export default function UserBar() {
         return null;
       }
 
-      fetch(`${process.env.REACT_APP_BLOG_API_BASEURL}/account/`, {
-        method: 'get',
-        headers: { Authorization: `Bearer ${token}`}
-      })
-      .then((response) => response.json())
+      getMe()
       .then((user) => setCurrentUser(user))
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        // TODO: handle error properly
+        console.error(err);
+      });
     }
     // setCurrentUser does not have to be included in the dependency array,
     // since it does not change

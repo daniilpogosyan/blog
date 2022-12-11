@@ -7,8 +7,7 @@ import Comments from './Comments';
 import CommentForm from './CommentForm';
 
 import CurrentUserContext from '../../contexts/CurrentUserContext';
-
-import { getJWT } from '../../storage/jwt';
+import { getComments, getPost, saveComment } from '../../apis/blog';
 
 import style from './PostWithComments.module.css';
 
@@ -34,61 +33,34 @@ export default function PostWithComments() {
   )
 }
 
-
-// Generic function for getting json data from response
-// It's required to request post and comments in parallel
-async function fetchAndGetBody(resource, authRequired = false) {
-  const fetchObj = {
-    headers: {},
-  }
-
-  if (authRequired) {
-    const token = getJWT();
-    if (token === null) {
-      return null
-    }
-    fetchObj.headers["Authorization"] = 'Bearer ' + token
-  }
-
-  const response = await fetch(resource, fetchObj);
-  const data = await response.json();
-  return data;
-}
-
 export async function loader({params, request}) {
   // parse query param to authorize
   const url = new URL(request.url);
   const authRequired = url.searchParams.get('authorize') === 'true';
 
-  const postBaseUrl = `${process.env.REACT_APP_BLOG_API_BASEURL}/posts/${params.postId}`;
-  const postUrl = postBaseUrl + (authRequired ? '?author=me' : '');
-  const commentsUrl = `${process.env.REACT_APP_BLOG_API_BASEURL}/posts/${params.postId}/comments/?sort=-createdAt`;
+  const requestForPost = authRequired
+  ? getPost(params.postId, { author: 'me' })
+  : getPost(params.postId);
+
   
-  // get post and comments in parallel
+  // TODO: handle error properly
   const [post, comments] = await Promise.all([
-    fetchAndGetBody(postUrl, authRequired),
-    fetchAndGetBody(commentsUrl)
+    requestForPost,
+    getComments(params.postId, {sort: '-createdAt'})
   ]);
+
   return { post, comments };
 }
 
 export async function action({params, request}) {
-  const token = getJWT();
-  if (!token) {
-    return null
-  }
-
   const formData = await request.formData();
   const comment = {
     body: formData.get('body')
   };
-
- await fetch(`${process.env.REACT_APP_BLOG_API_BASEURL}/posts/${params.postId}/comments`, {
-    method: 'post',
-    body: JSON.stringify(comment),
-    headers: {
-      'Content-type': 'application/json',
-      Authorization: 'Bearer ' + token
-    }
-  });
+  try {
+    await saveComment({ ...comment, post: params.postId });
+  } catch(err) {
+    // TODO: handle error properly
+    console.error(err);
+  }
 }

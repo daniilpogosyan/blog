@@ -1,4 +1,5 @@
 import { useLoaderData } from "react-router-dom";
+import { getPosts } from "../apis/blog";
 
 import PostList from '../components/PostList';
 
@@ -10,7 +11,6 @@ export default function Posts() {
 }
 
 export async function loader() {
-  const response = await fetch(`${process.env.REACT_APP_BLOG_API_BASEURL}/posts/`);
-  const posts = await response.json();
+  const posts = await getPosts();
   return posts;
 }

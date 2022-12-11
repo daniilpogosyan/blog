@@ -1,4 +1,5 @@
 import { Form, redirect } from 'react-router-dom';
+import { signup } from '../../apis/blog';
 
 import style from './SignUp.module.css';
 
@@ -45,14 +46,13 @@ export default function SignUp() {
 
 export async function action({request}) {
   const userData = Object.fromEntries(await request.formData());
-  const response = await fetch(`${process.env.REACT_APP_BLOG_API_BASEURL}/account/signup`, {
-    method: 'post',
-    headers: {
-      'Content-type': 'application/json'
-    },
-    body: JSON.stringify(userData)
-  });
+  try {
+    await signup(userData);
+  } catch(err) {
+    // TODO: handle error properly
+    console.error(err);
+    return;
+  }
 
-  if (response.status < 400)
-    return redirect('/');
+  return redirect('/');
 }

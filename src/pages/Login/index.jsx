@@ -1,20 +1,12 @@
+import { login } from '../../apis/blog';
 import { setJWT } from '../../storage/jwt';
 
 export async function action({request}) {
-  const formData = await request.formData()
-  const credentials = {
-    email: formData.get('email'),
-    password: formData.get('password')
-  };
-
-  const response = await fetch(`${process.env.REACT_APP_BLOG_API_BASEURL}/account/login`, {
-    method: 'post',
-    body: JSON.stringify(credentials),
-    headers: {
-      'Content-type': 'application/json'
-    }
-  });
-
-  const token = await response.json();
-  setJWT(token);
+  const formData = await request.formData();
+  try {
+    await login(formData.get('email'), formData.get('password'));
+  } catch(err) {
+    // TODO: handle error properly
+    console.error(err);
+  }
 }

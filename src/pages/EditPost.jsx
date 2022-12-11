@@ -1,6 +1,6 @@
 import { Form, redirect, useActionData, useLoaderData } from 'react-router-dom';
 import { Editor } from '@tinymce/tinymce-react';
-import { getJWT } from '../storage/jwt';
+import { getPost, savePost } from '../apis/blog';
 
 import style from './EditPost.module.css';
 
@@ -67,49 +67,32 @@ export default function NewPost() {
 
 
 export async function loader({params}) {
-  // postId is not provided
-  if (!params.postId) {
-    return redirect('/');
+  let post;
+  try {
+    post = await getPost(params.postId, {author: 'me'});
+  } catch(err) {
+    
+    console.error(err);
   }
 
-  const token = getJWT();
-  if (!token) {
-    return null
-  }
-
-  const response = await fetch(`${process.env.REACT_APP_BLOG_API_BASEURL}/posts/${params.postId}/?author=me`, {
-    headers: {
-      'Content-type': 'application/json',
-      Authorization: 'Bearer ' + token
-    }
-  });
-  const postData = await response.json();
-  return postData;
+  return post;
 }
 
 
 export async function action({request, params}) {
-  const token = getJWT();
-  if (!token) {
-    return null;
-  }
-
   const editedPost = Object.fromEntries(await request.formData());
 
-  const response = await fetch(`${process.env.REACT_APP_BLOG_API_BASEURL}/posts/${params.postId}`, {
-    method: 'put',
-    headers: {
-      'Content-type': 'application/json',
-      Authorization: `Bearer ${token}`
-    },
-    body: JSON.stringify(editedPost)
-  });
-
-  // Inform user of invalid input
-  if (response.status >= 400) {
-    return (await response.json()).errors;
+  let postFromResponse;
+  try {
+    postFromResponse = await savePost({
+      ...editedPost,
+      id: params.postId
+    });
+  } catch (err) {
+    // TODO: handle error properly
+    console.error(err);
+    return;
   }
-  const postFromResponse = await response.json();
 
   // After editing post can change status to a private one (unpublished, archived)
   // In this case authorization is required

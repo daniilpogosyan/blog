@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Outlet, useLoaderData } from "react-router-dom";
+import getMe from '../../apis/blog/getMe.js';
 
 import CurrentUserContext from '../../contexts/CurrentUserContext.js';
-import { getJWT } from  '../../storage/jwt';
 
 // Components 
 import Header from './Header';
@@ -24,18 +24,14 @@ export default function Root() {
 
 // Get data about currentUser
 export async function loader() {
-  const token = getJWT();
-  if (!token) {
-    return null;
+  let user;
+  try {
+    user = await getMe();
+  } catch(err) {
+    // TODO: handle error properly
+    console.error(err);
+    user = null;
   }
 
-  const response = await fetch(`${process.env.REACT_APP_BLOG_API_BASEURL}/account/`, {
-    method: 'get',
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  });
-
-  const user = response.status < 400 ? await response.json() : null
   return user;
 }
