@@ -1,5 +1,4 @@
 import { login } from '../../apis/blog';
-import { setJWT } from '../../storage/jwt';
 
 export async function action({request}) {
   const formData = await request.formData();

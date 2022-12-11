@@ -7,7 +7,6 @@ export default async function getComments(postId, params = {}) {
   }
 
   const url = new URL(`posts/${postId}/comments`, BASEURL);
-  const paramsEntries = Object.entries(params);
   Object.entries(params).forEach(([param, value]) => {
     url.searchParams.set(param, value);
   });

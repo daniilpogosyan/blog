@@ -20,12 +20,11 @@ export default async function saveComment(comment) {
     body: JSON.stringify(comment)
   }
 
-  let response;
   if (comment.id) {
     url.pathname = `/posts/${comment.post}/comments/${comment.id}`;
-    response = await httpClient.put(url, options);
+    await httpClient.put(url, options);
   } else {
     url.pathname = `/posts/${comment.post}/comments`;
-    response = await httpClient.post(url, options);
+    await httpClient.post(url, options);
   }
 }

@@ -6,7 +6,7 @@ export default function PostCard({ title, author, id, status, createdAt }) {
   const statusTagClassName = `${style['status-tag']} ${style[status]}`;
   // If the post is published, then authorization is not required.
   // If the post status is undefined, then the post is assumed to be published.
-  const linkUrl = (status === 'published' || status == undefined)
+  const linkUrl = (status === 'published' || status === undefined)
      ? `/posts/${id}` : `/posts/${id}/?authorize=true`;
   return (
     <div className={style.card}>

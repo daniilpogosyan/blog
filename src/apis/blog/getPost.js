@@ -8,7 +8,6 @@ export default async function getPost(postId, params = {}) {
   }
 
   const url = new URL(`posts/${postId}`, BASEURL);
-  const paramsEntries = Object.entries(params);
   Object.entries(params).forEach(([param, value]) => {
     url.searchParams.set(param, value);
   });
