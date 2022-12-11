@@ -4,7 +4,7 @@ import { getPost, savePost } from '../apis/blog';
 
 import style from './EditPost.module.css';
 
-export default function NewPost() {
+export default function EditPost() {
   const errors = useActionData();
   const postData = useLoaderData();
 
