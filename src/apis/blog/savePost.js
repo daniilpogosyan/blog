@@ -26,4 +26,8 @@ export default async function savePost(post) {
     url.pathname = '/posts';
     response = await httpClient.post(url, options);
   }
+
+  if (response.status === 200) {
+    return response.json();
+  }
 }

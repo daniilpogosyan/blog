@@ -5,8 +5,14 @@ import { BASEURL } from '../utils';
 
 describe('savePost()', () => {
   beforeEach(() => {
-    jest.spyOn(httpClient, 'post');
-    jest.spyOn(httpClient, 'put');
+    jest.spyOn(httpClient, 'post').mockResolvedValue({
+      json: () => Promise.resolve({title: 'mockpost', id: '1aac23'}),
+      status: 200
+    });
+    jest.spyOn(httpClient, 'put').mockResolvedValue({
+      json: () => Promise.resolve({title: 'mockpost', id: '5678aa'}),
+      status: 200
+    });
     setJWT('sometoken1234');
   });
 
@@ -48,6 +54,33 @@ describe('savePost()', () => {
     const body = httpClient.put.mock.lastCall[1].body;
     expect(body).toBe(JSON.stringify(post));
   });
+
+  test('returns updated post', async () => {
+    jest.spyOn(httpClient, 'put').mockResolvedValueOnce({
+      json: () => Promise.resolve({ title: 'I am a updated post', id: 'abc321' }),
+      status: 200
+    })
+    const post = {
+      title: 'I am a updated post',
+      id: 'abc321'
+    }
+    const returnedPost =  await savePost(post);
+    expect(returnedPost.id).toBe(post.id);
+  });
+  
+  test('returns new post', async () => {
+    jest.spyOn(httpClient, 'post').mockResolvedValueOnce({
+      json: () => Promise.resolve({ title: 'I am a new post', id: 'fff321' }),
+      status: 200
+    });
+
+    const post = {
+      title: 'I am a new post',
+    }
+
+    const returnedPost = await savePost(post);
+    expect(returnedPost.id).toBe('fff321');
+  })
 });
 
 describe('savePost() throws error', () => {
